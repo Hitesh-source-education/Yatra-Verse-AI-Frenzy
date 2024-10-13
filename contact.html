@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Time Traveler</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #8B4513;
+            --secondary-color: #D2691E;
+            --text-color: #4A3728;
+            --background-color: #FFF8DC;
+            --timeline-color: #A0522D;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            overflow-x: hidden;
+        }
+        
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background-color: rgba(139, 69, 19, 0.9);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        
+        header.scrolled {
+            background-color: rgba(139, 69, 19, 1);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #FFF8DC;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .logo:hover {
+            transform: scale(1.05);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style-type: none;
+        }
+        
+        nav ul li {
+            margin-left: 2rem;
+        }
+        
+        nav ul li a {
+            color: #FFF8DC;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #FFF8DC;
+            transition: width 0.3s ease;
+        }
+        
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+        
+        .contact-hero {
+            height: 50vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(rgba(139, 69, 19, 0.7), rgba(139, 69, 19, 0.7)), url('https://source.unsplash.com/1600x900/?india,history');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #FFF8DC;
+            padding: 2rem;
+            margin-top: 60px;
+        }
+        
+        .contact-hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .contact-content {
+            max-width: 100%;
+            padding: 4rem 2rem;
+            background-color: rgba(255, 248, 220, 0.9);
+        }
+        
+        .contact-info {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .contact-info h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+        }
+        
+        .contact-info p {
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            line-height: 1.6;
+        }
+        
+        .contact-info .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .contact-info .social-icons a {
+            color: var(--primary-color);
+            font-size: 2rem;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+        
+        .contact-info .social-icons a:hover {
+            color: var(--secondary-color);
+            transform: scale(1.1);
+        }
+        
+        .map-container {
+            width: 100%;
+            height: 400px;
+            margin-top: 4rem;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .faq-section {
+            max-width: 800px;
+            margin: 4rem auto;
+            padding: 2rem;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .faq-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+            text-align: center;
+        }
+        
+        .faq-item {
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--primary-color);
+            padding-bottom: 1rem;
+        }
+        
+        .faq-question {
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: var(--secondary-color);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .faq-question::after {
+            content: '+';
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .faq-question.active::after {
+            transform: rotate(45deg);
+        }
+        
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        .faq-answer p {
+            padding-top: 1rem;
+            line-height: 1.6;
+        }
+        
+        footer {
+            background-color: var(--primary-color);
+            color: #FFF8DC;
+            text-align: center;
+            padding: 1rem;
+            margin-top: 2rem;
+        }
+        
+        /* Particle effect */
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+        
+        @media (max-width: 768px) {
+            .contact-hero h1 {
+                font-size: 2.5rem;
+            }
+        
+            .contact-info h2, .faq-section h2 {
+                font-size: 2rem;
+            }
+        
+            .contact-info p {
+                font-size: 1rem;
+            }
+        
+            .map-container {
+                height: 300px;
+            }
+        }
+        .fas{
+            margin-left:13px;
+            margin-right:20px;
+        }
+        nav div a i {
+           
+			margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="particles-js"></div>
+
+    <header id="header">
+        <div class="logo"><i class='fas fa-clock' style='font-size:30px;color:antiquewhite'></i><I>YATRA VERSE</I></div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+                <li><a href="feedback.html">Feedback</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="contact-hero">
+        <h1>Contact Us</h1>
+    </section>
+
+    <div class="contact-content">
+        <div class="contact-info">
+            <h2>Get in Touch</h2>
+            <p>Have questions about Indian history or want to share your own historical insights? We'd love to hear from you!</p>
+            <p>Email: info@YatraVerse.com</p>
+            <p>Phone: +91 123 456 7890</p>
+            <p>Address: 123 History Lane, New Delhi, India</p>
+            <div class="social-icons">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+
+        <div class="map-container">
+            <!-- Replace with actual map embed code -->
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3505.5678141455903!2d77.20658461500383!3d28.613149682429266!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cfd5b347eb62d%3A0x52c2b7494e204dce!2sNew%20Delhi%2C%20Delhi%2C%20India!5e0!3m2!1sen!2sus!4v1635959684290!5m2!1sen!2sus" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+
+        <div class="faq-section">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-item">
+                <div class="faq-question">What periods of Indian history do you cover?</div>
+                <div class="faq-answer">
+                    <p>We cover a wide range of Indian history, from ancient civilizations like the Indus Valley to modern India. Our timeline includes major empires, cultural developments, and significant events that shaped the subcontinent.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">How accurate is the historical information on your website?</div>
+                <div class="faq-answer">
+                    <p>We strive for the highest level of accuracy in our historical content. Our team of historians and researchers carefully verify information from reputable sources and academic publications. However, we always encourage users to cross-reference and engage in further reading.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Can I contribute historical information or corrections?</div>
+                <div class="faq-answer">
+                    <p>Absolutely! We welcome contributions from history enthusiasts and scholars. Please use our feedback form to submit any information or corrections. Our team will review your submission and update the content if verified.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Do you offer educational resources for schools?</div>
+                <div class="faq-answer">
+                    <p>Yes, we provide educational resources suitable for various grade levels. These include downloadable lesson plans, interactive quizzes, and virtual tours. Contact us for more information on our educational packages.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 YATRA VERSE. All rights reserved.</p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+<script>
+     // Header scroll effect
+ const header = document.getElementById('header');
+
+ window.addEventListener('scroll', () => {
+     if (window.scrollY > 100) {
+         header.classList.add('scrolled');
+     } else {
+         header.classList.remove('scrolled');
+     }
+ });
+
+ // FAQ toggle
+ const faqQuestions = document.querySelectorAll('.faq-question');
+
+ faqQuestions.forEach(question => {
+     question.addEventListener('click', () => {
+         question.classList.toggle('active');
+         const answer = question.nextElementSibling;
+         if (question.classList.contains('active')) {
+             answer.style.maxHeight = answer.scrollHeight + 'px';
+         } else {
+             answer.style.maxHeight = 0;
+         }
+     });
+ });
+
+ // Particles.js
+ particlesJS('particles-js', {
+     particles: {
+         number: { value: 80, density: { enable: true, value_area: 800 } },
+         color: { value: '#8B4513' },
+         shape: { type: 'circle' },
+         opacity: { value: 0.5, random: false },
+         size: { value: 3, random: true },
+         line_linked: { enable: true, distance: 150, color: '#8B4513', opacity: 0.4, width: 1 },
+         move: { enable: true, speed: 6, direction: 'none', random: false, straight: false, out_mode: 'out', bounce: false }
+     },
+     interactivity: {
+         detect_on: 'canvas',
+         events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' }, resize: true },
+         modes: { grab: { distance: 400, line_linked: { opacity: 1 } }, bubble: { distance: 400, size: 40, duration: 2, opacity: 8, speed: 3 }, repulse: { distance: 200, duration: 0.4 }, push: { particles_nb: 4 }, remove: { particles_nb: 2 } }
+     },
+     retina_detect: true
+ });
+</script>
+</body>
+</html>

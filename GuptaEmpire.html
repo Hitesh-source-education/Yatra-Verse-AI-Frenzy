@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gupta Empire: Golden Age of Ancient India</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+	<style>
+       
+        :root {
+            --primary-color: #030303;
+            --secondary-color: #0e0e0e;
+           
+            --text-color:rgb(6, 6, 6);
+			--background-image: url(guptabackdrop.jpeg);
+			--background-repeat: repeat-y;
+			--background-size: contain;
+           
+			
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-image: var(--background-image);
+            color: var(--text-color);
+            background-repeat: var(--background-repeat);
+            background-size: var(--background-size);
+            backdrop-filter: blur(8px);
+            font-weight: 600;
+			font-size: 20px;
+        }
+
+        h1, h2, h3, .navbar-brand {
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .navbar {
+            background-color: rgba(90, 88, 88, 0.8);
+            backdrop-filter: blur(5px);
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: url('/api/placeholder/1920/1080') no-repeat center center;
+            background-size: cover;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-content {
+
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 5rem;
+			font-weight: 600;
+			color: #fff;
+            margin-bottom: 2rem;
+            animation:2s ease-in-out infinite alternate;
+        }
+		.hero p{
+			color: #fff;
+		}
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px var(--primary-color), 0 0 20px var(--primary-color), 0 0 35px var(--primary-color), 0 0 40px var(--primary-color), 0 0 50px var(--primary-color);
+            }
+            to {
+                text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px var(--primary-color), 0 0 40px var(--primary-color), 0 0 70px var(--primary-color), 0 0 80px var(--primary-color), 0 0 100px var(--primary-color);
+            }
+        }
+
+        .section-title {
+            font-weight: 800;
+            font-size: 40px;
+            text-align: center;
+            margin-top: 60px;
+            margin-bottom: 5rem;
+            color: var(--primary-color);
+        }
+        
+        .timeline {
+            position: relative;
+            top: -7px;
+            max-width: 1200px;
+            margin: 150px auto;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background-color: var(--primary-color);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+        }
+
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            right: -17px;
+            background-color: black;
+            border: 4px solid var(--primary-color);
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .left {
+            left: 0;
+        }
+
+        .right {
+            left: 50%;
+        }
+
+        .left::before {
+            content: " ";
+            height: 0;
+            position: absolute;
+            top: 22px;
+            width: 0;
+            z-index: 1;
+            right: 30px;
+            border: medium solid var(--primary-color);
+            border-width: 10px 0 10px 10px;
+            border-color: transparent transparent transparent var(--primary-color);
+        }
+
+        .right::before {
+            content: " ";
+            height: 0;
+            position: absolute;
+            top: 22px;
+            width: 0;
+            z-index: 1;
+            left: 30px;
+            border: medium solid var(--primary-color);
+            border-width: 10px 10px 10px 0;
+            border-color: transparent var(--primary-color) transparent transparent;
+        }
+
+        .right::after {
+            left: -16px;
+        }
+
+        .content {
+            padding: 20px 30px;
+            background-color: rgba(12, 12, 12, 0.1);
+            position: relative;
+            border-radius: 6px;
+            border: 1px solid var(--primary-color);
+            box-shadow: 2px 2px 2px 2px darkslategrey;
+        }
+
+        .card {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--primary-color);
+            margin-bottom: 20px;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(255, 0, 222, 0.5);
+        }
+
+        .card-img-top {
+            height: 200px;
+            object-fit: cover;
+        }
+
+        #culture-video {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border: 2px solid var(--primary-color);
+            border-radius: 10px;
+        }
+
+        .overview-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        .section-title{
+            font-weight: 15rem;
+        }
+        nav div a i {
+           
+			margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#"><i class='fas fa-clock' style='font-size:20px;color:rgb(244, 243, 241)'></i>YatraVerse</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#overview">Overview</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#timeline">Timeline</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#culture">Culture</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#gallery">Gallery</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="container hero-content">
+            <h1>Gupta Empire: Golden Age of Ancient India</h1>
+            <p class="lead">Journey through the era of cultural and scientific renaissance</p>
+			<a href="#overview" class="btn btn-outline-light btn-lg">Begin Your Journey</a>
+        </div>
+    </section>
+
+    <section id="overview" class="section">
+        <div class="container">
+            <h2 class="section-title">Gupta Empire Overview</h2>
+            <div class="row">
+                <div class="col-md-4 mb-4" data-aos="fade-up">
+                    <div class="card h-100">
+                        <img src="chandra1.jpeg" class="card-img-top" alt="Chandragupta I">
+                        <div class="card-body">
+                            <h5 class="card-title">Chandragupta I</h5>
+                            <p class="card-text">The founder of the Gupta Empire, who laid the foundation for a powerful dynasty.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="card h-100">
+                        <img src="samudraguppta.jpg" class="card-img-top" alt="Samudragupta">
+                        <div class="card-body">
+                            <h5 class="card-title">Samudragupta</h5>
+                            <p class="card-text">Known as the 'Napoleon of India', he greatly expanded the empire's territories.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="card h-100">
+                        <img src="chandra2.jpeg" class="card-img-top" alt="Chandragupta II">
+                        <div class="card-body">
+                            <h5 class="card-title">Chandragupta II</h5>
+                            <p class="card-text">Also known as Vikramaditya, his reign marked the zenith of the Gupta Empire.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="card h-100">
+                        <img src="fahein.jpg" class="card-img-top" alt="Fa-Hien">
+                        <div class="card-body">
+                            <h5 class="card-title">Fa-Hien's Visit</h5>
+                            <p class="card-text">The Chinese pilgrim's visit during this period provides valuable insights into Gupta society.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="400">
+                    <div class="card h-100">
+                        <img src="kalidas.jpg" class="card-img-top" alt="Kalidasa">
+                        <div class="card-body">
+                            <h5 class="card-title">Kalidasa</h5>
+                            <p class="card-text">The renowned Sanskrit poet and dramatist who flourished during the Gupta period.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="500">
+                    <div class="card h-100">
+                        <img src="aryabhat.jpg" class="card-img-top" alt="Aryabhata">
+                        <div class="card-body">
+                            <h5 class="card-title">Aryabhata</h5>
+                            <p class="card-text">The famous mathematician and astronomer who made significant contributions to science.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="timeline" class="section">
+        <div class="container">
+            <h2 class="section-title">Timeline of the Gupta Empire</h2>
+            <div class="timeline">
+                <div class="timeline-item left" data-aos="fade-right">
+                    <div class="content">
+                        <h2>320 CE</h2>
+                        <p>Chandragupta I founds the Gupta Empire</p>
+                    </div>
+                </div>
+                <div class="timeline-item right" data-aos="fade-left">
+                    <div class="content">
+                        <h2>335-380 CE</h2>
+                        <p>Reign of Samudragupta, marked by extensive military conquests</p>
+                    </div>
+                </div>
+                <div class="timeline-item left" data-aos="fade-right">
+                    <div class="content">
+                        <h2>380-415 CE</h2>
+                        <p>Reign of Chandragupta II, the Golden Age of Gupta Empire</p>
+                    </div>
+                </div>
+                <div class="timeline-item right" data-aos="fade-left">
+                    <div class="content">
+                        <h2>405-411 CE</h2>
+                        <p>Fa-Hien's visit to India during Chandragupta II's reign</p>
+                    </div>
+                </div>
+                <div class="timeline-item left" data-aos="fade-right">
+                    <div class="content">
+                        <h2>455-467 CE</h2>
+                        <p>Reign of Skandagupta, marked by conflicts with the Huns</p>
+                    </div>
+                </div>
+                <div class="timeline-item right" data-aos="fade-left">
+                    <div class="content">
+                        <h2>550 CE</h2>
+                        <p>Decline of the Gupta Empire</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="culture" class="py-5">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Culture During the Gupta Empire</h2>
+            <div class="row">
+                <div class="col-md-6" data-aos="fade-right">
+                    <h3>Art and Architecture</h3>
+                    <p>The Gupta period saw the development of the Nagara style of temple architecture. The caves of Ajanta and Ellora showcase the pinnacle of Indian rock-cut architecture and painting.</p>
+                    <h3>Literature</h3>
+                    <p>Sanskrit literature flourished with works by Kalidasa, including plays like Shakuntala and poems like Meghaduta. The Puranas were also compiled during this period.</p>
+                    <h3>Science and Mathematics</h3>
+                    <p>Aryabhata's work on astronomy and mathematics, including the concept of zero and the approximation of pi, were groundbreaking. Varahamihira made significant contributions to astronomy.</p>
+                </div>
+                <div class="col-md-6" data-aos="fade-left">
+                    <img src="guptaculture.jpeg" width="575px">
+                    </video>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery" class="py-5">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Gallery</h2>
+            <div class="row">
+                <div class="col-md-4" data-aos="zoom-in">
+                    <div class="card">
+                        <img src="guptacoins.jpeg" class="card-img-top" alt="Gupta Coins">
+                        <div class="card-body">
+                            <h5 class="card-title">Gupta Coins</h5>
+                            <p class="card-text">Gold coins from the Gupta period, showcasing the prosperity of the empire.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="card">
+                        <img src="ajantacaves.jpg" class="card-img-top" alt="Ajanta Caves">
+                        <div class="card-body">
+                            <h5 class="card-title">Ajanta Caves</h5>
+                            <p class="card-text">Buddhist cave monuments featuring paintings and rock-cut sculptures.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="card">
+                        <img src="ironpillar.jpg" class="card-img-top" alt="Iron Pillar of Delhi">
+                        <div class="card-body">
+                            <h5 class="card-title">Iron Pillar of Delhi</h5>
+                            <p class="card-text">A testament to the advanced metallurgy of the Gupta period.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-dark text-light py-4">
+        <div class="container text-center">
+            <p>&copy; 2024 Gupta Empire: Golden Age of Ancient India. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+	<script>
+		document.addEventListener('DOMContentLoaded', (event) => {
+			// Initialize AOS (Animate on Scroll)
+			AOS.init({
+				duration: 1000,
+				once: true
+			});
+
+			// Navbar background change on scroll
+			const navbar = document.querySelector('.navbar');
+			const heroSection = document.querySelector('.hero');
+
+			window.addEventListener('scroll', () => {
+				if (window.scrollY > heroSection.offsetHeight - navbar.offsetHeight) {
+					navbar.classList.add('bg-dark');
+				} else {
+					navbar.classList.remove('bg-dark');
+				}
+			});
+
+			// Smooth scrolling for navigation links
+			document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+				anchor.addEventListener('click', function (e) {
+					e.preventDefault();
+					document.querySelector(this.getAttribute('href')).scrollIntoView({
+						behavior: 'smooth'
+					});
+				});
+			});
+
+			// Parallax effect for hero section
+			window.addEventListener('scroll', () => {
+				const scrollPosition = window.pageYOffset;
+				heroSection.style.backgroundPositionY = scrollPosition * 0.7 + 'px';
+			});
+
+			// Interactive timeline
+			const timelineItems = document.querySelectorAll('.timeline-item');
+			timelineItems.forEach(item => {
+				item.addEventListener('mouseenter', () => {
+					item.style.transform = 'scale(1.05)';
+					item.style.transition = 'transform 0.3s ease-in-out';
+				});
+				item.addEventListener('mouseleave', () => {
+					item.style.transform = 'scale(1)';
+				});
+			});
+
+			// Culture video play/pause on hover
+			const cultureVideo = document.getElementById('culture-video');
+			cultureVideo.addEventListener('mouseenter', () => {
+				cultureVideo.play();
+			});
+			cultureVideo.addEventListener('mouseleave', () => {
+				cultureVideo.pause();
+			});
+		});
+	</script>
+</body>
+</html>

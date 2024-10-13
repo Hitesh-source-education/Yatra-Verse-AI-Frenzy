@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Traveler - About Us</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+   <link rel="stylesheet" href="about.css">
+   <style>
+    :root {
+        --primary-color: #8B4513;
+        --secondary-color: #D2691E;
+        --text-color: #4A3728;
+        --background-color: #FFF8DC;
+        --timeline-color: #A0522D;
+    }
+    
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    body {
+        font-family: 'Roboto', sans-serif;
+        color: var(--text-color);
+        background-color: var(--background-color);
+        overflow-x: hidden;
+    }
+    
+    header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        background-color: rgba(139, 69, 19, 0.9);
+        padding: 1rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: all 0.3s ease;
+    }
+    
+    header.scrolled {
+        background-color: rgba(139, 69, 19, 1);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .logo {
+        font-family: 'Playfair Display', serif;
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: #FFF8DC;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+    }
+    
+    .logo:hover {
+        transform: scale(1.05);
+    }
+    
+    nav ul {
+        display: flex;
+        list-style-type: none;
+    }
+    
+    nav ul li {
+        margin-left: 2rem;
+    }
+    
+    nav ul li a {
+        color: #FFF8DC;
+        text-decoration: none;
+        font-size: 1.1rem;
+        transition: all 0.3s ease;
+        position: relative;
+    }
+    
+    nav ul li a::after {
+        content: '';
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background-color: #FFF8DC;
+        transition: width 0.3s ease;
+    }
+    
+    nav ul li a:hover::after {
+        width: 100%;
+    }
+    
+    .hero {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        background: linear-gradient(rgba(139, 69, 19, 0.7), rgba(139, 69, 19, 0.7)), url('https://source.unsplash.com/1600x900/?ancient,india');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        color: #FFF8DC;
+        padding: 2rem;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(139, 69, 19, 0.3);
+        z-index: 1;
+    }
+    
+    .hero-content {
+        position: relative;
+        z-index: 2;
+    }
+    
+    .hero h1 {
+        font-family: 'Playfair Display', serif;
+        font-size: 4.5rem;
+        margin-bottom: 1rem;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeInUp 1s ease forwards;
+    }
+    
+    .hero p {
+        font-size: 1.8rem;
+        max-width: 800px;
+        margin-bottom: 2rem;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeInUp 1s ease 0.5s forwards;
+    }
+    
+    @keyframes fadeInUp {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    .scroll-down {
+        position: absolute;
+        bottom: 2rem;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 2rem;
+        color: #FFF8DC;
+        animation: bounce 2s infinite;
+    }
+    
+    @keyframes bounce {
+        0%, 20%, 50%, 80%, 100% {
+            transform: translateY(0);
+        }
+        40% {
+            transform: translateY(-30px);
+        }
+        60% {
+            transform: translateY(-15px);
+        }
+    }
+    
+    .about-section {
+        padding: 100px 0;
+        background-color: #FFF8DC;
+    }
+    
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+    }
+    
+    .about-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        align-items: center;
+    }
+    
+    .about-image {
+        position: relative;
+        overflow: hidden;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+    
+    .about-image img {
+        width: 100%;
+        height: auto;
+        transition: transform 0.5s ease;
+    }
+    
+    .about-image:hover img {
+        transform: scale(1.05);
+    }
+    
+    .about-content h2 {
+        font-family: 'Playfair Display', serif;
+        font-size: 3rem;
+        margin-bottom: 1.5rem;
+        color: var(--primary-color);
+    }
+    
+    .about-content p {
+        font-size: 1.1rem;
+        line-height: 1.8;
+        margin-bottom: 1.5rem;
+    }
+    
+    .timeline {
+        position: relative;
+        max-width: 1200px;
+        margin: 100px auto;
+        padding: 0 2rem;
+    }
+    
+    .timeline::after {
+        content: '';
+        position: absolute;
+        width: 6px;
+        background-color: var(--timeline-color);
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        margin-left: -3px;
+    }
+    
+    .timeline-item {
+        padding: 10px 40px;
+        position: relative;
+        background-color: inherit;
+        width: 50%;
+    }
+    
+    .timeline-item::after {
+        content: '';
+        position: absolute;
+        width: 25px;
+        height: 25px;
+        right: -17px;
+        background-color: var(--background-color);
+        border: 4px solid var(--timeline-color);
+        top: 15px;
+        border-radius: 50%;
+        z-index: 1;
+    }
+    
+    .left {
+        left: 0;
+    }
+    
+    .right {
+        left: 50%;
+    }
+    
+    .left::before {
+        content: " ";
+        height: 0;
+        position: absolute;
+        top: 22px;
+        width: 0;
+        z-index: 1;
+        right: 30px;
+        border: medium solid var(--timeline-color);
+        border-width: 10px 0 10px 10px;
+        border-color: transparent transparent transparent var(--timeline-color);
+    }
+    
+    .right::before {
+        content: " ";
+        height: 0;
+        position: absolute;
+        top: 22px;
+        width: 0;
+        z-index: 1;
+        left: 30px;
+        border: medium solid var(--timeline-color);
+        border-width: 10px 10px 10px 0;
+        border-color: transparent var(--timeline-color) transparent transparent;
+    }
+    
+    .right::after {
+        left: -16px;
+    }
+    
+    .timeline-content {
+        padding: 20px 30px;
+        background-color: #FFF;
+        position: relative;
+        border-radius: 6px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    
+    .team-section {
+        padding: 100px 0;
+        background-color: #F5DEB3;
+    }
+    
+    .team-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+    }
+    
+    .team-member {
+        background-color: #FFF;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+    }
+    
+    .team-member:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+    }
+    
+    .member-image {
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .member-image img {
+        width: 100%;
+        height: auto;
+        transition: transform 0.5s ease;
+    }
+    
+    .team-member:hover .member-image img {
+        transform: scale(1.1);
+    }
+    
+    .member-info {
+        padding: 1.5rem;
+        text-align: center;
+    }
+    
+    .member-info h3 {
+        font-family: 'Playfair Display', serif;
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+        color: var(--primary-color);
+    }
+    
+    .member-info p {
+        font-size: 1rem;
+        color: var(--text-color);
+        margin-bottom: 1rem;
+    }
+    
+    .social-icons {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+    }
+    
+    .social-icons a {
+        color: var(--primary-color);
+        font-size: 1.2rem;
+        transition: all 0.3s ease;
+    }
+    
+    .social-icons a:hover {
+        color: var(--secondary-color);
+        transform: translateY(-3px);
+    }
+    
+    .cta-section {
+        padding: 100px 0;
+        background: linear-gradient(rgba(139, 69, 19, 0.9), rgba(139, 69, 19, 0.9)), url('https://source.unsplash.com/1600x900/?india,culture');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        color: #FFF8DC;
+        text-align: center;
+    }
+    
+    .cta-content h2 {
+        font-family: 'Playfair Display', serif;
+        font-size: 3rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .cta-content p {
+        font-size: 1.2rem;
+        max-width: 800px;
+        margin: 0 auto 2rem;
+    }
+    
+    .cta-button {
+        display: inline-block;
+        background-color: var(--secondary-color);
+        color: #FFF8DC;
+        padding: 1rem 2.5rem;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 1.2rem;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    .cta-button:hover {
+        background-color: #CD853F;
+        transform: translateY(-5px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+    
+    footer {
+        background-color: var(--primary-color);
+        color: #FFF8DC;
+        padding: 2rem 0;
+        text-align: center;
+    }
+    
+    footer p {
+        font-size: 1rem;
+    }
+    
+    @media (max-width: 768px) {
+        .about-grid {
+            grid-template-columns: 1fr;
+        }
+    
+        .hero h1 {
+            font-size: 3rem;
+        }
+    
+        .hero p {
+            font-size: 1.3rem;
+        }
+    
+        .about-content h2 {
+            font-size: 2.5rem;
+        }
+    
+        .cta-content h2 {
+            font-size: 2.5rem;
+        }
+    
+        .timeline::after {
+            left: 31px;
+        }
+    
+        .timeline-item {
+            width: 100%;
+            padding-left: 70px;
+            padding-right: 25px;
+        }
+    
+        .timeline-item::before {
+            left: 60px;
+            border: medium solid var(--timeline-color);
+            border-width: 10px 10px 10px 0;
+            border-color: transparent var(--timeline-color) transparent transparent;
+        }
+    
+        .left::after, .right::after {
+            left: 15px;
+        }
+    
+        .right {
+            left: 0%;
+        }
+    }
+    
+    @media (max-width: 480px) {
+        .hero h1 {
+            font-size: 2.5rem;
+        }
+    
+        .hero p {
+            font-size: 1.1rem;
+        }
+    
+        .about-content h2 {
+            font-size: 2rem;
+        }
+    
+        .cta-content h2 {
+            font-size: 2rem;
+        }
+    }
+    .fas{
+        margin-left:13px;
+        margin-right:13px;
+    }
+   </style>
+</head>
+<body>
+    <header id="header">
+        <div class="logo"><i class='fas fa-clock' style='font-size:30px;color:antiquewhite'></i><i>YATRA VERSE</i></div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+                <li><a href="feedback.html">Feedback</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1 data-aos="fade-up">About Yatra Verse</h1>
+            <p data-aos="fade-up" data-aos-delay="200">Discover the rich tapestry of Indian history through our immersive experiences</p>
+        </div>
+        <a href="#about" class="scroll-down">
+            <i class="fas fa-chevron-down"></i>
+        </a>
+    </section>
+
+    <section class="about-section" id="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-image" data-aos="fade-right">
+                    <img src="indianhistory.webp" alt="Indian History">
+                </div>
+                <div class="about-content" data-aos="fade-left">
+                    <h2>Our Mission</h2>
+                    <p>At YatraVerse, we are passionate about bringing Indian history to life. Our mission is to create immersive, educational experiences that transport you through the ages of Indian civilization, from the ancient Indus Valley to modern-day India.</p>
+                    <p>We believe that understanding our past is key to shaping our future. Through cutting-edge technology and expert storytelling, we aim to make history accessible, engaging, and relevant to people of all ages and backgrounds.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="timeline">
+        <div class="timeline-item left" data-aos="fade-right">
+            <div class="timeline-content">
+                <h2>2023</h2>
+                <p>YatraVerse was founded with a vision to revolutionize historical education.</p>
+            </div>
+        </div>
+        <div class="timeline-item right" data-aos="fade-left">
+            <div class="timeline-content">
+                <h2>2024</h2>
+                <p>Launched our First Book, "Ancient India: A Journey Through Time".</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="team-section">
+        <div class="container">
+            <h2 data-aos="fade-up" style="text-align: center; font-family: 'Playfair Display', serif; font-size: 3rem; margin-bottom: 3rem; color: var(--primary-color);">Our Team</h2>
+            <div class="team-grid">
+                <div class="team-member" data-aos="fade-up">
+                    <div class="member-image">
+                        <img src="mariya.jpg" alt="Team Member 1">
+                    </div>
+                    <div class="member-info">
+                        <h3>Mariya Ghasletwala</h3>
+                        <p>Co-Founder</p>
+                        <div class="social-icons">
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="team-member" data-aos="fade-up" data-aos-delay="200">
+                    <div class="member-image">
+                        <img src="hitesh.jpg" alt="Team Member 2">
+                    </div>
+                    <div class="member-info">
+                        <h3>Hitesh Patil</h3>
+                        <p>Co-founder</p>
+                        <div class="social-icons">
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2 data-aos="fade-up">Ready to Explore Indian History?</h2>
+                <p data-aos="fade-up" data-aos-delay="200">Join us on a journey through time and experience the wonders of India's rich cultural heritage.</p>
+                <a href="index.html" class="cta-button" data-aos="fade-up" data-aos-delay="400">Start Your Journey</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; <span id="current-year"></span> YATRA VERSE. All rights reserved.</p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+            // Initialize AOS
+    AOS.init({
+        duration: 1000,
+        once: true,
+    });
+
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+
+    // Header scroll effect
+    window.addEventListener('scroll', () => {
+        const header = document.getElementById('header');
+        if (window.scrollY > 100) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    });
+
+    // Parallax effect for hero section
+    window.addEventListener('scroll', () => {
+        const hero = document.querySelector('.hero');
+        const scrollPosition = window.pageYOffset;
+        hero.style.backgroundPositionY = scrollPosition * 0.7 + 'px';
+    });
+
+    // Set current year in footer
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
+</body>

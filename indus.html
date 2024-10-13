@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Leap to the Past: Indus Valley Civilization</title>
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+	<style>
+		:root {
+			--primary-color: #080707;
+			--secondary-color: #f7f6fa;
+			--text-color: #ffffff;
+			
+			background-image: url(backdrop.jpg);
+			background-repeat: repeat-y;
+			background-size: contain;
+			opacity: 90%;
+			
+		}
+
+		body {
+			font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+			background-color: var(--background-color);
+			color: var(--text-color);
+			overflow-x: hidden;
+		}
+
+		.navbar {
+			background-color: rgba(65, 64, 64, 0.7);
+			backdrop-filter: blur(10px);
+		}
+
+		.hero {
+			height: 118vh;
+			background-image: url('/api/placeholder/1920/1080');
+			background-size: cover;
+			background-position: center;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			position: relative;
+			overflow: hidden;
+		}
+
+		.hero::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background: rgba(0, 0, 0, 0.5);
+		}
+
+		.hero-content {
+			
+			text-align: center;
+			position: relative;
+			z-index: 1;
+		}
+
+		.hero h1 {
+			font-size: 5rem;
+			font-weight: 600;
+			text-shadow: 0 0 10px #211153;
+			animation: 2s ease-in-out infinite alternate;
+		
+		}
+
+		@keyframes glow {
+			from {
+				text-shadow: 0 0 5px var(--primary-color);
+			}
+
+			to {
+				text-shadow: 0 0 20px var(--primary-color), 0 0 30px var(--secondary-color);
+			}
+		}
+
+		.section {
+			padding: 100px 0;
+		}
+
+		.section-title {
+			font-size: 2.5rem;
+			margin-bottom: 50px;
+			margin-top: 60px;
+			text-align: center;
+			color: var(--text-color);
+			margin-top: 80px;
+		}
+
+		.card {
+			color: #ffffff;
+			background-color: rgba(6, 5, 5, 0.1);
+			border: 1px solid var(--primary-color);
+			transition: transform 0.3s ease, box-shadow 0.3s ease;
+		}
+
+		.card:hover {
+			transform: translateY(-10px);
+			box-shadow: 0 0 20px var(--primary-color);
+		}
+
+		.card-img-top {
+			height: 200px;
+			object-fit: cover;
+		}
+
+		.timeline {
+			position: relative;
+			max-width: 1200px;
+			margin: 0 auto;
+		}
+
+		.timeline::after {
+			content: '';
+			position: absolute;
+			width: 6px;
+			background-color: var(--primary-color);
+			top: 0;
+			bottom: 0;
+			left: 50%;
+			margin-left: -3px;
+		}
+
+		.timeline-item {
+			padding: 10px 40px;
+			position: relative;
+			background-color: inherit;
+			width: 50%;
+		}
+
+		.timeline-item::after {
+			content: '';
+			position: absolute;
+			width: 25px;
+			height: 25px;
+			right: -17px;
+			background-color: var(--secondary-color);
+			border: 4px solid var(--primary-color);
+			top: 15px;
+			border-radius: 50%;
+			z-index: 1;
+		}
+
+		.left {
+			left: 0;
+		}
+
+		.right {
+			left: 50%;
+		}
+
+		.left::before {
+			content: " ";
+			height: 0;
+			position: absolute;
+			top: 22px;
+			width: 0;
+			z-index: 1;
+			right: 30px;
+			border: medium solid var(--primary-color);
+			border-width: 10px 0 10px 10px;
+			border-color: transparent transparent transparent var(--primary-color);
+		}
+
+		.right::before {
+			content: " ";
+			height: 0;
+			position: absolute;
+			top: 22px;
+			width: 0;
+			z-index: 1;
+			left: 30px;
+			border: medium solid var(--primary-color);
+			border-width: 10px 10px 10px 0;
+			border-color: transparent var(--primary-color) transparent transparent;
+		}
+
+		.right::after {
+			left: -16px;
+		}
+
+		.timeline-content {
+			padding: 20px 30px;
+			background-color: rgba(255, 255, 255, 0.1);
+			position: relative;
+			border-radius: 6px;
+			box-shadow: 2px 2px 2px 2px darkslategrey;
+		}
+
+		#artifacts-gallery {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: center;
+			gap: 20px;
+		}
+
+		.artifact {
+			width: 300px;
+			background-color: rgba(255, 255, 255, 0.1);
+			border-radius: 10px;
+			overflow: hidden;
+			transition: transform 0.3s ease;
+		}
+
+		.artifact:hover {
+			transform: scale(1.05);
+		}
+
+		.artifact img {
+			width: 100%;
+			height: 200px;
+			object-fit: cover;
+		}
+
+		.artifact-info {
+			padding: 15px;
+		}
+
+		
+
+		
+
+		@media screen and (max-width: 600px) {
+			.timeline::after {
+				left: 31px;
+			}
+
+			.timeline-item {
+				width: 100%;
+				padding-left: 70px;
+				padding-right: 25px;
+			}
+
+			.timeline-item::before {
+				left: 60px;
+				border: medium solid white;
+				border-width: 10px 10px 10px 0;
+				border-color: transparent white transparent transparent;
+			}
+
+			.left::after,
+			.right::after {
+				left: 15px;
+			}
+
+			.right {
+				left: 0%;
+			}
+		}
+		/* Events Section */
+        .events {
+            padding: 80px 0;
+            background-color: var(--accent-color);
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			margin-bottom: 40px;
+        }
+
+        .events h2 {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 40px;
+            color: #fff;
+        }
+
+        .event-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .event-item {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .event-item:hover {
+            transform: translateX(10px);
+        }
+
+        .event-item h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        .event-item p {
+            font-size: 16px;
+            color: black;
+        }
+		nav div a i {
+           
+			margin-right: 5px;
+        }
+		
+	</style>
+</head>
+
+<body>
+	<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+		<div class="container">
+			<a class="navbar-brand" href="#"><i class='fas fa-clock' style='font-size:20px;color:rgb(244, 243, 241)'></i>YatraVerse</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+				aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNav">
+				<ul class="navbar-nav ms-auto">
+					<li class="nav-item">
+						<a class="nav-link" href="index.html">Home</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#overview">Overview</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#timeline">Timeline</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#artifacts">Artifacts</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#virtual-tour">Upcoming Events</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<header class="hero">
+		<div class="hero-content">
+			<h1 class="mb-4"> Indus Valley Civilization:</h1>
+			<h1 class="mb-4">Journey Through Time</h1>
+			<p class="lead mb-4">Experience the wonders of an ancient world</p>
+			<a href="#overview" class="btn btn-outline-light btn-lg">Begin Your Journey</a>
+		</div>
+	</header>
+
+	<main>
+		<section id="overview" class="section">
+			<div class="container">
+				<h2 class="section-title">Discover the Indus Valley</h2>
+				<div class="row">
+					<div class="col-md-4 mb-4" data-aos="fade-up">
+						<div class="card h-100">
+							<img src="cityplanning.webp" class="card-img-top" alt="City Planning">
+							<div class="card-body">
+								<h5 class="card-title">Advanced Urban Planning</h5>
+								<p class="card-text">Explore the meticulously planned cities of Harappa and
+									Mohenjo-daro, marvels of ancient engineering.</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+						<div class="card h-100">
+							<img src="tradenetwork.jpg" class="card-img-top" alt="Trade Network">
+							<div class="card-body">
+								<h5 class="card-title">Extensive Trade Networks</h5>
+								<p class="card-text">Uncover the vast trade routes that connected the Indus Valley to
+									distant lands.</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+						<div class="card h-100">
+							<img src="aryans.jpeg" class="card-img-top" alt="Trade Network">
+							<div class="card-body">
+								<h5 class="card-title">The Aryans</h5>
+								<p class="card-text">The Indo-Aryans were part of an expansion into the Indus Valley and Ganges Plain from1800-1500 BCE.</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+						<div class="card h-100">
+							<img src="urbanization.jpeg" class="card-img-top" alt="Trade Network">
+							<div class="card-body">
+								<h5 class="card-title">Urbanization</h5>
+								<p class="card-text">The Indus Valley Civilization (IVC) underwent a process of urbanization that began around 6000 BCE</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+						<div class="card h-100">
+							<img src="persia.jpg" class="card-img-top" alt="Trade Network">
+							<div class="card-body">
+								<h5 class="card-title">The Persia-Rule</h5>
+								<p class="card-text">The Persian Empire, also known as the Achaemenid Empire, conquered parts of the Indus Valley in the 6th century BCE: </p>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+						<div class="card h-100">
+							<img src="mysterious script.jpg" class="card-img-top" alt="Script">
+							<div class="card-body">
+								<h5 class="card-title">Mysterious Script</h5>
+								<p class="card-text">Dive into the enigma of the undeciphered Indus script and its
+									potential meanings.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section id="timeline" class="section">
+			<div class="container">
+				<h2 class="section-title">Timeline of the Indus Valley Civilization</h2>
+				<div class="timeline">
+					<div class="timeline-item left" data-aos="fade-right">
+						<div class="timeline-content">
+							<h3>3300 BCE</h3>
+							<p>Early Harappan Phase begins, marking the start of the Indus Valley Civilization.</p>
+						</div>
+					</div>
+					<div class="timeline-item right" data-aos="fade-left">
+						<div class="timeline-content">
+							<h3>2600 BCE</h3>
+							<p>Mature Harappan Phase - Urban centers flourish with advanced infrastructure.</p>
+						</div>
+					</div>
+					<div class="timeline-item left" data-aos="fade-right">
+						<div class="timeline-content">
+							<h3>1900 BCE</h3>
+							<p>Late Harappan Phase begins, showing signs of cultural changes and urban decline.</p>
+						</div>
+					</div>
+					<div class="timeline-item right" data-aos="fade-left">
+						<div class="timeline-content">
+							<h3>1300 BCE</h3>
+							<p>The civilization gradually disappears, leaving behind a rich archaeological legacy.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section id="artifacts" class="section">
+			<div class="container">
+				<h2 class="section-title">Artifacts Gallery</h2>
+				<div id="artifacts-gallery">
+					<!-- Artifacts will be dynamically added here -->
+				</div>
+			</div>
+		</section>
+
+		<section id="virtual-tour" class="section">
+			<div class="container">
+                <h2>Upcoming Events</h2>
+                <div class="event-list">
+                    <div class="event-item">
+                        <h3>Virtual Tour: Mohenjo-daro</h3>
+                        <p>Date: May 15, 2024 | Experience a guided virtual tour of the ancient city of Mohenjo-daro.</p>
+                    </div>
+                    <div class="event-item">
+                        <h3>Lecture: Decoding the Indus Script</h3>
+                        <p>Date: June 5, 2024 | Join leading experts as they discuss the latest theories on the Indus script.</p>
+                    </div>
+                    <div class="event-item">
+                        <h3>Workshop: Ancient Indus Valley Crafts</h3>
+                        <p>Date: July 20, 2024 | Learn traditional crafting techniques from the Indus Valley Civilization.</p>
+                    </div>
+                </div>
+            </div>
+		</section>
+	</main>
+
+	<footer class="bg-dark text-light py-4">
+		<div class="container text-center">
+			<p>&copy; 2024 Indus Valley Time Portal. All rights reserved.</p>
+		</div>
+	</footer>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+	<script>
+		// Initialize AOS (Animate on Scroll)
+		AOS.init({
+			duration: 1000,
+			once: true
+		});
+
+		// Artifact data
+		const artifacts = [
+			{ name: "Dancing Girl", description: "A bronze statuette of a dancing girl, a remarkable piece of Indus art.", image: "dancing girl.jpg" },
+			{ name: "Priest King", description: "A stone sculpture believed to represent an important Indus Valley figure.", image: "prstking.jpeg" },
+			{ name: "Seals", description: "Intricate seals used in trade, featuring the mysterious Indus script.", image: "seals.jpeg" },
+			{ name: "Great Bath", description: "The Great Bath of Mohenjo-daro, possibly used for ritualistic bathing.", image: "greatbath.webp" }
+		];
+
+		// Populate artifacts gallery
+		function populateArtifactsGallery() {
+			const artifactsGallery = document.getElementById('artifacts-gallery');
+			artifacts.forEach(artifact => {
+				const artifactElement = document.createElement('div');
+				artifactElement.className = 'artifact';
+				artifactElement.innerHTML = `
+            <img src="${artifact.image}" alt="${artifact.name}">
+            <div class="artifact-info">
+                <h3>${artifact.name}</h3>
+                <p>${artifact.description}</p>
+            </div>
+        `;
+				artifactsGallery.appendChild(artifactElement);
+			});
+		}
+
+		// Virtual tour data
+		const hotspots = [
+			{ x: 20, y: 30, title: "Great Bath", description: "A large public water tank used for special religious functions." },
+			{ x: 50, y: 60, title: "Granary", description: "A massive building believed to be a granary for storing grain." },
+			{ x: 80, y: 40, title: "Assembly Hall", description: "A spacious building that may have been used for public gatherings." }
+		];
+
+		// Create hotspots for virtual tour
+		function createHotspots() {
+			const tourContainer = document.getElementById('tour-container');
+			hotspots.forEach((hotspot, index) => {
+				const hotspotElement = document.createElement('div');
+				hotspotElement.className = 'hotspot';
+				hotspotElement.style.left = `${hotspot.x}%`;
+				hotspotElement.style.top = `${hotspot.y}%`;
+				hotspotElement.addEventListener('click', () => showHotspotInfo(index));
+				tourContainer.appendChild(hotspotElement);
+			});
+		}
+
+		// Show hotspot information
+		function showHotspotInfo(index) {
+			const hotspotInfo = document.getElementById('hotspot-info');
+			const hotspot = hotspots[index];
+			hotspotInfo.innerHTML = `
+        <h3>${hotspot.title}</h3>
+        <p>${hotspot.description}</p>
+    `;
+			hotspotInfo.style.display = 'block';
+		}
+
+		// Smooth scrolling for navigation links
+		document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+			anchor.addEventListener('click', function (e) {
+				e.preventDefault();
+				document.querySelector(this.getAttribute('href')).scrollIntoView({
+					behavior: 'smooth'
+				});
+			});
+		});
+
+		// Initialize the page
+		function init() {
+			populateArtifactsGallery();
+			createHotspots();
+		}
+
+		// Run initialization when the DOM is fully loaded
+		document.addEventListener('DOMContentLoaded', init);
+
+	</script>
+</body>
+
+</html>

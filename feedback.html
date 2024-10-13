@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback - Time Traveler</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="feedback.css">
+    <style>
+        :root {
+            --primary-color: #8B4513;
+            --secondary-color: #D2691E;
+            --text-color: #4A3728;
+            --background-color: #FFF8DC;
+            --timeline-color: #A0522D;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            line-height: 1.6;
+        }
+        
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background-color: rgba(139, 69, 19, 0.9);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        
+        header.scrolled {
+            background-color: rgba(139, 69, 19, 1);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #FFF8DC;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .logo:hover {
+            transform: scale(1.05);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style-type: none;
+        }
+        
+        nav ul li {
+            margin-left: 2rem;
+        }
+        
+        nav ul li a {
+            color: #FFF8DC;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #FFF8DC;
+            transition: width 0.3s ease;
+        }
+        
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+        
+        main {
+            max-width: 1200px;
+            margin: 6rem auto 2rem;
+            padding: 0 2rem;
+        }
+        
+        h1, h2 {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            text-align: center;
+        }
+        
+        h2 {
+            font-size: 2rem;
+        }
+        
+        .feedback-container {
+            background-color: rgba(255, 248, 220, 0.7);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .star-rating {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .star {
+            font-size: 3rem;
+            color: #FFFFFF;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 0 0.5rem;
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+        
+        .star:hover,
+        .star.active {
+            color: #FFD700;
+            transform: scale(1.2);
+        }
+        
+        .star.active {
+            animation: glow 1s ease-in-out infinite alternate;
+        }
+        
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 5px #FFD700;
+            }
+            to {
+                text-shadow: 0 0 10px #FFD700, 0 0 20px #FFD700;
+            }
+        }
+        
+        textarea {
+            width: 100%;
+            height: 150px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            border: 2px solid var(--secondary-color);
+            border-radius: 10px;
+            font-family: 'Roboto', sans-serif;
+            font-size: 1rem;
+            resize: vertical;
+        }
+        
+        button {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            background-color: var(--secondary-color);
+            color: var(--background-color);
+            border: none;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        
+        button:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+        
+        .demo-feedback {
+            margin-top: 3rem;
+        }
+        .feedback-scroll {
+            display: flex;
+            overflow-x: hidden;  /* Changed from auto to hidden */
+            scroll-snap-type: x mandatory;
+            gap: 1.5rem;
+            padding-bottom: 1rem;
+            scroll-behavior: smooth;
+            position: relative;  /* Added for absolute positioning of children */
+        }
+        
+        .feedback-item {
+            flex: 0 0 300px;
+            scroll-snap-align: start;
+            background-color: #FFF8E7;
+            border: 1px solid #8B4513;
+            border-radius: 10px;
+            padding: 1.5rem;
+            color: var(--text-color);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .feedback-item:hover {
+            transform: translateY(-5px);
+        }
+        .icon-box i {
+            color: #FFF8DC;
+            font-size: 1.2rem;
+        }
+        .feedback-stars {
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+            color: #FFD700;
+            text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+        }
+        
+        footer {
+            background-color: var(--primary-color);
+            color: var(--background-color);
+            text-align: center;
+            padding: 1rem 0;
+            margin-top: 2rem;
+        }
+        
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 1rem;
+            }
+        
+            nav {
+                margin-top: 1rem;
+            }
+        
+            nav ul {
+                flex-direction: column;
+            }
+        
+            nav ul li {
+                margin-left: 0;
+                margin-bottom: 0.5rem;
+            }
+        
+            main {
+                padding: 0 1rem;
+                margin-top: 8rem;
+            }
+        
+            h1 {
+                font-size: 2.5rem;
+            }
+        
+            .star {
+                font-size: 2.5rem;
+            }
+        }
+        .fa-clock{
+            margin-left:13px;
+            margin-right:13px;
+        }
+
+    </style>
+</head>
+<body>
+    <header id="header">
+        <div class="logo"><i class='fas fa-clock' style='font-size:30px;color:antiquewhite'></i><i>YATRA VERSE</i></div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                
+                <li><a href="contact.html">Contact Us</a></li>
+                <li><a href="feedback.html">Feedback</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Your Feedback Matters</h1>
+        
+        <section class="feedback-container">
+            <h2>Rate Your Experience</h2>
+            <div class="star-rating">
+                <span class="star" data-rating="1">★</span>
+                <span class="star" data-rating="2">★</span>
+                <span class="star" data-rating="3">★</span>
+                <span class="star" data-rating="4">★</span>
+                <span class="star" data-rating="5">★</span>
+            </div>
+            <textarea id="feedback-text" placeholder="Share your thoughts on your journey through Indian history..."></textarea>
+            <button id="submit-feedback">Submit Feedback</button>
+        </section>
+
+        <section class="demo-feedback">
+            <h2>What Our YatraVerse Say</h2>
+            <div class="feedback-scroll" id="feedback-scroll">
+                <!-- Demo feedback items will be added here by JavaScript -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 YATRA VERSE. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const header = document.getElementById('header');
+const stars = document.querySelectorAll('.star');
+const feedbackText = document.getElementById('feedback-text');
+const submitButton = document.getElementById('submit-feedback');
+const feedbackScroll = document.getElementById('feedback-scroll');
+
+let currentRating = 0;
+
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 100) {
+        header.classList.add('scrolled');
+    } else {
+        header.classList.remove('scrolled');
+    }
+});
+
+stars.forEach(star => {
+    star.addEventListener('click', () => {
+        currentRating = parseInt(star.getAttribute('data-rating'));
+        updateStars();
+    });
+});
+
+function updateStars() {
+    stars.forEach(star => {
+        const rating = parseInt(star.getAttribute('data-rating'));
+        if (rating <= currentRating) {
+            star.classList.add('active');
+        } else {
+            star.classList.remove('active');
+        }
+    });
+}
+
+const demoFeedbacks = [
+    { rating: 5, text: "An incredible journey through time! The Indus Valley Civilization section was particularly fascinating." },
+    { rating: 4, text: "Very informative. I especially enjoyed learning about the Gupta Empire's contributions to science and arts." },
+    { rating: 5, text: "The timeline design is beautiful and easy to navigate. Great job on the visual representation of history!" },
+    { rating: 4, text: "Loved the Mughal Empire section. The details about architectural achievements were eye-opening." },
+    { rating: 5, text: "As a history buff, I'm impressed by the depth of information. The transition from ancient to modern India is well presented." },
+    { rating: 4, text: "The British Colonial Period section provided a balanced view. Appreciate the objective presentation of facts." }
+];
+
+function addFeedbackItem(feedback) {
+    const feedbackItem = document.createElement('div');
+    feedbackItem.classList.add('feedback-item');
+    
+    const starsHtml = '★'.repeat(feedback.rating) + '☆'.repeat(5 - feedback.rating);
+    feedbackItem.innerHTML = `
+        <div class="feedback-stars">${starsHtml}</div>
+        <p>${feedback.text}</p>
+    `;
+    
+    feedbackScroll.appendChild(feedbackItem);
+}
+
+demoFeedbacks.forEach(addFeedbackItem);
+demoFeedbacks.forEach(addFeedbackItem);
+let scrollPosition = 0;
+const scrollSpeed = 0.5; // Adjust this value to change scroll speed
+
+function autoScroll() {
+    scrollPosition += scrollSpeed;
+    if (scrollPosition >= feedbackScroll.scrollWidth / 2) {
+        scrollPosition = 0;
+    }
+    feedbackScroll.scrollLeft = scrollPosition;
+    requestAnimationFrame(autoScroll);
+}
+
+autoScroll();
+
+// Pause scrolling on hover
+feedbackScroll.addEventListener('mouseenter', () => {
+    scrollSpeed = 0;
+});
+
+feedbackScroll.addEventListener('mouseleave', () => {
+    scrollSpeed = 0.5;
+});
+submitButton.addEventListener('click', () => {
+    if (currentRating > 0 && feedbackText.value.trim() !== '') {
+        const newFeedback = {
+            rating: currentRating,
+            text: feedbackText.value.trim()
+        };
+        addFeedbackItem(newFeedback);
+        
+        // Reset form
+        currentRating = 0;
+        updateStars();
+        feedbackText.value = '';
+        
+        // Show confirmation
+        alert('Thank you for your valuable feedback! Your insights help us improve the Time Traveler experience.');
+    } else {
+        alert('Please provide both a rating and feedback before submitting.');
+    }
+});
+
+
+
+autoScroll();
+    </script>
+</body>
+</html>

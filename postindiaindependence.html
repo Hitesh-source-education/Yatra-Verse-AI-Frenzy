@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post-Independence India: Journey Through Time</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #f9f5f9;
+            --secondary-color: #0e0e0e;
+            --text-color:rgb(245, 240, 240);
+            --background-image: url(flag.webp);
+            --background-repeat: repeat-y;
+            --background-size: contain;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-image: var(--background-image);
+            color: var(--text-color);
+            background-repeat: var(--background-repeat);
+            background-size: var(--background-size);
+            backdrop-filter: blur(3px);
+            font-weight: 600;
+            font-size: 20px;
+        }
+
+        h1, h2, h3, .navbar-brand {
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .navbar {
+            background-color: rgba(90, 88, 88, 0.8);
+            backdrop-filter: blur(5px);
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: url('/api/placeholder/1920/1080') no-repeat center center;
+            background-size: cover;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-weight:600 ;
+            font-size: 5rem;
+            margin-bottom: 2rem;
+            animation:2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px var(--primary-color), 0 0 20px var(--primary-color), 0 0 35px var(--primary-color), 0 0 40px var(--primary-color), 0 0 50px var(--primary-color);
+            }
+            to {
+                text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px var(--primary-color), 0 0 40px var(--primary-color), 0 0 70px var(--primary-color), 0 0 80px var(--primary-color), 0 0 100px var(--primary-color);
+            }
+        }
+
+        .section-title {
+            font-weight: 800;
+            font-size: 40px;
+            text-align: center;
+            margin-top: 60px;
+            margin-bottom: 5rem;
+            color: var(--primary-color);
+        }
+        
+        .timeline {
+            position: relative;
+            top: -7px;
+            max-width: 1200px;
+            margin: 150px auto;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background-color: var(--primary-color);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+        }
+
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            right: -17px;
+            background-color: black;
+            border: 4px solid var(--primary-color);
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .left {
+            left: 0;
+        }
+
+        .right {
+            left: 50%;
+        }
+
+        .left::before {
+            content: " ";
+            height: 0;
+            position: absolute;
+            top: 22px;
+            width: 0;
+            z-index: 1;
+            right: 30px;
+            border: medium solid var(--primary-color);
+            border-width: 10px 0 10px 10px;
+            border-color: transparent transparent transparent var(--primary-color);
+        }
+
+        .right::before {
+            content: " ";
+            height: 0;
+            position: absolute;
+            top: 22px;
+            width: 0;
+            z-index: 1;
+            left: 30px;
+            border: medium solid var(--primary-color);
+            border-width: 10px 10px 10px 0;
+            border-color: transparent var(--primary-color) transparent transparent;
+        }
+
+        .right::after {
+            left: -16px;
+        }
+
+        .content {
+            padding: 20px 30px;
+            background-color: rgba(12, 12, 12, 0.1);
+            position: relative;
+            border-radius: 6px;
+            border: 1px solid var(--primary-color);
+            box-shadow: 2px 2px 2px 2px darkslategrey;
+        }
+
+        .card {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--primary-color);
+            margin-bottom: 20px;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(255, 0, 222, 0.5);
+        }
+
+        .card-img-top {
+            height: 200px;
+            object-fit: cover;
+        }
+
+        #culture-video {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border: 2px solid var(--primary-color);
+            border-radius: 10px;
+        }
+
+        .overview-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        .section-title{
+            font-weight: 15rem;
+        }
+		.row1 img{
+			
+				width: 500px;
+				height: 300px;
+			  
+		}
+		nav div a i {
+           
+			margin-right: 5px;
+        }
+		
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#"><i class='fas fa-clock' style='font-size:20px;color:rgb(244, 243, 241)'></i>YatraVerse</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#overview">Overview</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#timeline">Timeline</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#progress">Progress</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#gallery">Gallery</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="container hero-content">
+            <h1>Post-Independence India: Journey Through Time</h1>
+            <p class="lead">Explore the transformation of a nation since 1947</p>
+            <a href="#overview" class="btn btn-outline-light btn-lg">Begin Your Journey</a>
+        </div>
+    </section>
+
+    <section id="overview" class="section">
+        <div class="container">
+            <h2 class="section-title">Post-Independence India Overview</h2>
+            <div class="row">
+                <div class="col-md-4 mb-4" data-aos="fade-up">
+                    <div class="card h-100">
+                        <img src="jw.nehru.webp" class="card-img-top" alt="Jawaharlal Nehru">
+                        <div class="card-body">
+                            <h5 class="card-title">Jawaharlal Nehru</h5>
+                            <p class="card-text">India's first Prime Minister who laid the foundation for a modern, secular state.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="card h-100">
+                        <img src="greenrev.jpg" class="card-img-top" alt="Green Revolution">
+                        <div class="card-body">
+                            <h5 class="card-title">Green Revolution</h5>
+                            <p class="card-text">Transformation in agriculture that led to food self-sufficiency.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="card h-100">
+                        <img src="ecoonomicreforms.jpeg" class="card-img-top" alt="Economic Reforms">
+                        <div class="card-body">
+                            <h5 class="card-title">Economic Reforms</h5>
+                            <p class="card-text">1991 liberalization policies that opened up India's economy to the world.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="card h-100">
+                        <img src="spaceprogram.png" class="card-img-top" alt="Space Program">
+                        <div class="card-body">
+                            <h5 class="card-title">Space Program</h5>
+                            <p class="card-text">India's journey from launching its first satellite to Mars orbiter mission.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="400">
+                    <div class="card h-100">
+                        <img src="digi.webp" class="card-img-top" alt="Digital India">
+                        <div class="card-body">
+                            <h5 class="card-title">Digital India</h5>
+                            <p class="card-text">Initiative to transform India into a digitally empowered society and knowledge economy.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="500">
+                    <div class="card h-100">
+                        <img src="global.webp" class="card-img-top" alt="Emerging Global Power">
+                        <div class="card-body">
+                            <h5 class="card-title">Emerging Global Power</h5>
+                            <p class="card-text">India's rising influence in international affairs and global economy.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="timeline" class="section">
+        <div class="container">
+            <h2 class="section-title">Timeline of Post-Independence India</h2>
+            <div class="timeline">
+                <div class="timeline-item left" data-aos="fade-right">
+                    <div class="content">
+                        <h2>1947</h2>
+                        <p>India gains independence from British rule</p>
+                    </div>
+                </div>
+                <div class="timeline-item right" data-aos="fade-left">
+                    <div class="content">
+                        <h2>1950</h2>
+                        <p>India becomes a republic with its own constitution</p>
+                    </div>
+                </div>
+                <div class="timeline-item left" data-aos="fade-right">
+                    <div class="content">
+                        <h2>1961</h2>
+                        <p>Goa liberated from Portuguese rule</p>
+                    </div>
+                </div>
+                <div class="timeline-item right" data-aos="fade-left">
+                    <div class="content">
+                        <h2>1969</h2>
+                        <p>Bank nationalization</p>
+                    </div>
+                </div>
+                <div class="timeline-item left" data-aos="fade-right">
+                    <div class="content">
+                        <h2>1971</h2>
+                        <p>Bangladesh Liberation War</p>
+                    </div>
+                </div>
+                <div class="timeline-item right" data-aos="fade-left">
+                    <div class="content">
+                        <h2>1974</h2>
+                        <p>India conducts its first nuclear test</p>
+                    </div>
+                </div>
+                <div class="timeline-item left" data-aos="fade-right">
+                    <div class="content">
+                        <h2>1991</h2>
+                        <p>Economic liberalization begins</p>
+                    </div>
+                </div>
+                <div class="timeline-item right" data-aos="fade-left">
+                    <div class="content">
+                        <h2>2014</h2>
+                        <p>Launch of 'Make in India' initiative</p>
+                    </div>
+                </div>
+                <div class="timeline-item left" data-aos="fade-right">
+                    <div class="content">
+                        <h2>2020</h2>
+                        <p>India battles COVID-19 pandemic</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+		<!-- Previous body content remains the same -->
+	
+		<section id="progress" class="py-5">
+			<div class="container">
+				<h2 class="section-title" data-aos="fade-up">Progress Since Independence</h2>
+				<div class="row">
+					<div class="col-md-4 mb-4" data-aos="fade-up">
+						<div class="card h-100">
+							<div class="card-body">
+								<h5 class="card-title">Education</h5>
+								<p class="card-text">Literacy rate increased from 18% in 1951 to over 74% in 2021.</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+						<div class="card h-100">
+							<div class="card-body">
+								<h5 class="card-title">Economy</h5>
+								<p class="card-text">GDP growth from $37 billion in 1947 to over $2.6 trillion in 2020.</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+						<div class="card h-100">
+							<div class="card-body">
+								<h5 class="card-title">Life Expectancy</h5>
+								<p class="card-text">Increased from 32 years in 1947 to 69 years in 2020.</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+						<div class="card h-100">
+							<div class="card-body">
+								<h5 class="card-title">Nuclear Power</h5>
+								<p class="card-text">India developed Asia's first nuclear reactor, the Apsara, in 1956.</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+						<div class="card h-100">
+							<div class="card-body">
+								<h5 class="card-title">Digital Payments</h5>
+								<p class="card-text">In 2022, India was one of five countries to top the list of digital payments.</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+						<div class="card h-100">
+							<div class="card-body">
+								<h5 class="card-title">Healthcare</h5>
+								<p class="card-text">People have access to free treatments at government hospitals</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	
+		<section id="gallery" class="py-5">
+			<div class="container">
+				<h2 class="section-title" data-aos="fade-up">Gallery</h2>
+				<div class="row row1">
+					<div class="col-md-4 mb-4" data-aos="zoom-in">
+						<img src="celeb.jpeg" alt="Independence Day celebration" class="img-fluid rounded">
+					</div>
+					<div class="col-md-4 mb-4" data-aos="zoom-in" data-aos-delay="100">
+						<img src="gre.jpeg" alt="Green Revolution" class="img-fluid rounded">
+					</div>
+					<div class="col-md-4 mb-4" data-aos="zoom-in" data-aos-delay="200">
+						<img src="sp.jpeg" alt="Indian Space Program" class="img-fluid rounded">
+					</div>
+					<div class="col-md-4 mb-4" data-aos="zoom-in" data-aos-delay="200">
+						<img src="viksitbharat.webp" alt="Indian Space Program" class="img-fluid rounded">
+					</div>
+					<div class="col-md-4 mb-4" data-aos="zoom-in" data-aos-delay="200">
+						<img src="india.png" alt="Indian Space Program" class="img-fluid rounded">
+					</div>
+					<div class="col-md-4 mb-4" data-aos="zoom-in" data-aos-delay="200">
+						<img src="bharat.jpg" alt="Indian Space Program" class="img-fluid rounded">
+					</div>
+				</div>
+			</div>
+		</section>
+	
+		<footer class="bg-dark text-white py-4">
+			<div class="container text-center">
+				<p>&copy; 2024 YatraVerse. All rights reserved.</p>
+			</div>
+		</footer>
+	
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+		<script>
+			AOS.init({
+				duration: 1000,
+				once: true
+			});
+		</script>
+	</body>
+	</html>
